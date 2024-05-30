@@ -1,34 +1,16 @@
 import { connect } from 'react-redux';
-import TodoListComponent from './components/TodoList'; // Import component gốc của bạn
-import { addTodo, deleteTodo, deleteAllTodo, editTodo } from './actions';
-// const mapStateToProps = (state:any) => {
-//     return { todos: state.todos };
-// };
+import TodoListComponent from './components/TodoList';
+import { addTodo, deleteTodo, clearTodo, editTodo } from './actions';
 
-// const mapDispatchToProps = (dispatch:any) => {
-//     return {
-//         addTodo: (text:string) => dispatch(addTodo(text)),
-//         deleteTodo: (id:any) => dispatch(deleteTodo(id)),
-//         clearAllTodo: () => dispatch(deleteAllTodo()),
-//         editTodo: ({id, text}:any) => dispatch(editTodo({ id, text })),
-//     };
-// };
+const mapStateToProps = (state: any) => ({
+  todos: state.todos
+});
 
-// const TodoList = connect(mapStateToProps, mapDispatchToProps)(TodoListComponent);
+const mapDispatchToProps = (dispatch: any) => ({
+  addTodo: (todo: any) => dispatch(addTodo(todo)),
+  deleteTodo: (id: any) => dispatch(deleteTodo(id)),
+  clearTodo: () => dispatch(clearTodo()),
+  editTodo: ({ id, text }: any) => dispatch(editTodo({ id, text }))
+});
 
-// export default TodoList;
-
-export const TodoList = connect(
-    function mapStateToProps(state){
-        return {todos: state}
-    },
-
-    function mapDispatchToProps(dispatch){
-        return {
-            addTodo: (text:string) => dispatch(addTodo(text)),
-            deleteTodo: (id:any) => dispatch(deleteTodo(id)),
-            clearAllTodo: () => dispatch(deleteAllTodo()),
-            editTodo: ({id, text}:any) => dispatch(editTodo({ id, text })),
-        };
-    }
-)(TodoListComponent)
+export const TodoList = connect(mapStateToProps, mapDispatchToProps)(TodoListComponent);

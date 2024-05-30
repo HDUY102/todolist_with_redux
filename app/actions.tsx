@@ -1,27 +1,25 @@
 import { v4 as uuidv4 } from 'uuid';
 
-// const id = uuidv4()
-
-export function addTodo(text:string){
+export function addTodo(todo:{text:string}){
     return{
         type: 'ADD_TODO',
         payload: {
             id: uuidv4(),
-            text
+            text: todo.text
         }
     }
 }
 
-export function deleteTodo(id:any){
+export function deleteTodo(id:string){
     return{
         type: 'DELETE_TODO',
         payload: id
     }
 }
 
-export function deleteAllTodo(){
+export function clearTodo(){
     return{
-        type: 'DELETE_ALL_TODO'
+        type: 'CLEAR_TODO'
     }
 }
 
