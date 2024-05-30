@@ -1,13 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-interface Todo {
-    id: string;
-    text: string;
-}
-
-interface State {
-    todos: Todo[];
-}
-
 const initialState= {
     todos: []
 }

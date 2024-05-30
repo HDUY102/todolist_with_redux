@@ -36,7 +36,6 @@ const TodoList = (props:any) => {
     clearTodo()
   }
 
-  console.log('TodoList rendered with todos:', todos); 
   return (
     <div className='flex justify-center items-center mt-9'>
       <div className='w-[900px] p-5'>
