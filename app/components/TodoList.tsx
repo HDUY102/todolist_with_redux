@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import TodoItem from './TodoItem'
 import { useDispatch } from 'react-redux';
-
-// const TodoList = ({ todos, addTodo, deleteTodo, clearTodo }:any) => {
+import {store} from '@/app/page'
+import { v4 as uuidv4 } from 'uuid';
 const TodoList = (props:any) => {
-  const { todos, addTodo, clearTodo} = props;
+  //C1:
+  // const { todos, addTodo, clearTodo} = props;
+  const { todos,clearTodo} = props;
   const [todoText, setTodoText] = useState('')
-  // const dispatch = useDispatch()
-
+  const dispatch = useDispatch()
   const onFocus = (e:any) =>{
     setTodoText(e.target.value)
   }
@@ -15,7 +16,18 @@ const TodoList = (props:any) => {
   });
   const handleAddTodo = () => {
     if (todoText.length > 0) {
-      addTodo({ text: todoText });
+      // C1:
+      // addTodo({ text: todoText });
+      // C2:
+      // dispatch({type: 'ADD_TODO',payload:{
+      //   text: todoText,
+      //   id: uuidv4()
+      // }})
+      // C3:
+      store.dispatch({type: 'ADD_TODO',payload:{
+        text: todoText,
+        id: uuidv4()
+      }})
       setTodoText('');
     }
   };
@@ -29,7 +41,7 @@ const TodoList = (props:any) => {
     <div className='flex justify-center items-center mt-9'>
       <div className='w-[900px] p-5'>
         <div className='flex justify-center mt-9'>
-          <input type="text" value={todoText} onChange={onFocus} placeholder="Todo List" className="input input-bordered w-[320px] h-[70px] max-w-xs border-2 rounded-lg" />
+          <input type="text" value={todoText} onChange={onFocus} placeholder="Todo List" className="p-1 input input-bordered w-[320px] h-[70px] max-w-xs border-2 rounded-lg" />
         </div>
         <div className='flex justify-between mt-3 w-80 mx-auto'>
           <button className='px-4 py-2 bg-green-500 text-white rounded' onClick={handleAddTodo}>Add</button>

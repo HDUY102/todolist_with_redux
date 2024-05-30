@@ -23,12 +23,12 @@ export function clearTodo(){
     }
 }
 
-export function editTodo({text,id}:any){
+export function editTodo(todo:{text:string, id: string}){
     return{
         type: 'EDIT_TODO',
         payload:{
-            id: id,
-            text: text
+            id: todo.id,
+            text: todo.text
         }
     }
 }
